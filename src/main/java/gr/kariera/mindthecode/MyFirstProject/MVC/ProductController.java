@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/products")
 public class ProductController {
@@ -23,6 +25,13 @@ public class ProductController {
     @GetMapping("/index")
     public String index() {
         return "index";
+    }
+
+    @GetMapping()
+    public String showProducts(Model model) {
+        List<Product> products = service.getAllProducts();
+        model.addAttribute("products", products);
+        return "products";
     }
 
     @GetMapping("/addProduct")

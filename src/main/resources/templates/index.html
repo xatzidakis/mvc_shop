@@ -17,7 +17,7 @@
 <header>
   <nav class="navbar navbar-expand-lg bg-body-tertiary mx-4 mt-3">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">OurGreatShop</a>
+      <a class="navbar-brand" th:href="@{/products/index}">OurGreatShop</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 pe-3">
 
@@ -26,7 +26,7 @@
               Products
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#">List Products</a></li>
+              <li><a class="dropdown-item" th:href="@{/products}">List Products</a></li>
 
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" th:href="@{/products/addProduct}">Add Products</a></li>
