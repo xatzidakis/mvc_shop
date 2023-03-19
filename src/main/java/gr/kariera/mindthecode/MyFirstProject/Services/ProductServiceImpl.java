@@ -7,6 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl implements ProductService{
 
@@ -45,6 +47,11 @@ public class ProductServiceImpl implements ProductService{
             res = productRepository.findByDescriptionContainingIgnoreCase(description, paging);
         }
         return res;
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 
     @Override
