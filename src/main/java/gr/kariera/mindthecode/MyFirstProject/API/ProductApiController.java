@@ -3,7 +3,9 @@ package gr.kariera.mindthecode.MyFirstProject.API;
 import gr.kariera.mindthecode.MyFirstProject.Entities.Product;
 import gr.kariera.mindthecode.MyFirstProject.Services.ProductService;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -28,9 +30,9 @@ public class ProductApiController {
 
 
     @PutMapping("{id}")
-    public Product updateProduct(@PathVariable Integer id, @RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody Product product) {
         try {
-            return service.createOrUpdateProduct(id, product);
+            return new ResponseEntity <>(service.createOrUpdateProduct(id, product), HttpStatus.OK);
         } catch (Exception e) {
             throw new HttpClientErrorException(HttpStatusCode.valueOf(400), e.getMessage());
         }
