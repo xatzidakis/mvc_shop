@@ -2,9 +2,10 @@ package gr.kariera.mindthecode.MyFirstProject.Services;
 
 import gr.kariera.mindthecode.MyFirstProject.Entities.Order;
 import gr.kariera.mindthecode.MyFirstProject.Repositories.OrderRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class OrderServiceImpl implements OrderService{
     private final OrderRepository repository;
 
