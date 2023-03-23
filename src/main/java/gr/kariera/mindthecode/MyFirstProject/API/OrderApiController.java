@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/orders")
 public class OrderApiController {
@@ -22,6 +24,11 @@ public class OrderApiController {
     public OrderApiController(OrderService service, ProductService productService) {
         this.orderService = service;
         this.productService = productService;
+    }
+
+    @GetMapping
+    public List<Order> getAllOrders(){
+        return orderService.getAllOrders();
     }
 
     @GetMapping("/{id}")
