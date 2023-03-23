@@ -1,7 +1,7 @@
 package gr.kariera.mindthecode.MyFirstProject.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+        import jakarta.persistence.Column;
+        import jakarta.persistence.Embeddable;
 @Embeddable
 public class OrderProductPK {
 
