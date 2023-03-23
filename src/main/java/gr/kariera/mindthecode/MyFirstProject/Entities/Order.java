@@ -18,6 +18,9 @@ public class Order {
     @GeneratedValue
     private Integer id;
 
+    private Double discountPercentage = 0d;
+    private String address;
+
     public Order() {
         this.orderProducts = new ArrayList<>();
     }
@@ -111,7 +114,5 @@ public class Order {
         this.discountPercentage = discountPercentage;
     }
 
-    private Double discountPercentage = 0d;
 
-    private String address;
 }

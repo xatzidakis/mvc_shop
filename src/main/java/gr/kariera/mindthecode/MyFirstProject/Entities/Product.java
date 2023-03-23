@@ -15,7 +15,8 @@ public class Product {
     @Id
     @GeneratedValue
     private Integer id;
-
+    private BigDecimal price;
+    private String description;
     public Collection<OrderProduct> getOrderProducts() {
         return orderProducts;
     }
@@ -52,8 +53,5 @@ public class Product {
         this.description = description;
     }
 
-    private BigDecimal price;
-
-    private String description;
 
 }

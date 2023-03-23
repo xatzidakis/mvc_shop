@@ -64,14 +64,14 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>Description</th>
-            <th>Price</th>
+            <th>Address</th>
+            <th>discount</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="order: ${orders}">
-            <td th:text="${product.description}"></td>
-            <td th:text="${product.price}"></td>
+            <td th:text="${order.address}"></td>
+            <td th:text="${order.id}"></td>
         </tr>
         </tbody>
     </table>
