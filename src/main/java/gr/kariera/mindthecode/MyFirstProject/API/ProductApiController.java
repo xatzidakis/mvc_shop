@@ -5,7 +5,7 @@ import gr.kariera.mindthecode.MyFirstProject.Services.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;;
+import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
 @RequestMapping("/api/product")
