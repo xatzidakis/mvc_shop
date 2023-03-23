@@ -77,9 +77,6 @@ public class OrderApiController {
                     finalOrder.setOrderProducts(finalOrder.getOrderProducts());
 
                 });
-//        Order result = repo.save(finalOrder);
-//        return repo.findById(result.getId())
-//                .orElseThrow();
 
         Order resultOrder = orderService.createOrUpdateOrder(finalOrder.getId(),finalOrder);
         return resultOrder;
