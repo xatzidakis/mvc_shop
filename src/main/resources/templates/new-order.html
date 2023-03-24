@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:bootstrap="http://www.thymeleaf.org/thymeleaf-extras-bootstrap5">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mx-4 mt-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/products/index}">OurGreatShop</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 pe-3">
+
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" th:href="@{/products}">List Products</a></li>
+
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/products/addProduct}">Add Products</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Orders
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">List Orders</a></li>
+
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Add Order</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div id="logo" class="carousel slide mx-5 pt-2" >
+        <img src="https://www.oliverwyman.com/content/dam/oliver-wyman/global/en/images/designs/logo.png" class="d-block mx-auto" alt="..."style="height: 100px; width: 100px">
+    </div>
+</header>
+
+<main class="container">
+
+    <div class="row ">
+
+        <div class="col-6">
+            <h4 class="text-center text-primary">
+                Choose Products
+            </h4>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="firstProd">
+                    <td name="description">Iphone case</td>
+                    <td name="price">334</td>
+                    <td>
+                        <button id="demo" onclick="myFunction()" style="border: none; background-color: transparent">
+                            <i class="bi bi-cart"></i>
+                        </button>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>Samsung case</td>
+                    <td >88</td>
+                </tr>
+                <tr>
+                    <td>Iphone 7</td>
+                    <td >787</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6">
+            <h4 class="text-center text-primary">
+                Cart
+            </h4>
+            <div>
+                <label for="address">Address:</label>
+                <input class="col-7" type="text" name="address" id="address"></input>
+                <label for="address">Discount:</label>
+                <input class="col-1" type="number" name="discount" id="discount"></input>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+                </thead>
+                <tbody id="cart">
+                <tr  th:each="product : ${products}">
+                    <td class="col-7" th:text="${product.description}"></td>
+                    <td class="col-3" th:text="${product.price}"></td>
+                    <td class="col-2"><input class="col-7 text-center" type="number"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <script>
+    function myFunction() {
+  var el = document.getElementById("firstProd");
+  el.remove();
+  var description = el.children.description.name;
+  var price = el.children.description.price;
+  var productId = el.id;
+
+  var tr = document.createElement('tr');
+  tr.id = productId;
+  var tdDescription = document.createElement('td');
+  tdDescription.name = description;
+  var tdPrice = document.createElement('td');
+  tdPrice.name = price;
+  var tdQuantity = document.createElement('input');
+  tdQuantity.type = 'number';
+  var cart = document.getElementById("cart");
+  cart.appendChild(el);
+
+}
+</script>
+</main>
+<footer>
+    <!-- Footer content here -->
+</footer>
+<!--<script th:src="@{/js/script.js}"></script>-->
+
+</body>
+
+</html>
