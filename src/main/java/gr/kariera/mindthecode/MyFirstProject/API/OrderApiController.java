@@ -8,9 +8,7 @@ import gr.kariera.mindthecode.MyFirstProject.Entities.Product;
 import gr.kariera.mindthecode.MyFirstProject.Services.OrderService;
 import gr.kariera.mindthecode.MyFirstProject.Services.ProductService;
 import jakarta.transaction.Transactional;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -37,17 +35,16 @@ public class OrderApiController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
+    public String delete(@PathVariable Integer id) {
         orderService.deleteOrder(id);
+        return "Deleted";
     }
 
-    @PutMapping("/orders/{id}")
-    public Order update(@PathVariable Integer id, @RequestBody Order order) throws Exception {
-        try {
-            return orderService.createOrUpdateOrder(id, order);
-        } catch (Exception e) {
-            throw new HttpClientErrorException(HttpStatusCode.valueOf(400), e.getMessage());
-        }
+    @PutMapping("/{id}")
+    public Order updateOrder(@PathVariable Integer id,
+                        @RequestBody NewOrderDto newOrderDto ) throws Exception {
+        Order updatedOrder = updateOrder(id,newOrderDto);
+        return updatedOrder;
     }
 
     @PostMapping

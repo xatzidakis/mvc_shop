@@ -22,6 +22,14 @@ public class Order {
         this.orderProducts = new ArrayList<>();
     }
 
+    public void setProducts(Collection<ProductWithQuantityDto> products) {
+        this.products = products;
+    }
+
+    public void setTotalCost(BigDecimal totalCost) {
+        this.totalCost = totalCost;
+    }
+
     public Order(Collection<OrderProduct> products) {
         this.orderProducts = products;
     }
