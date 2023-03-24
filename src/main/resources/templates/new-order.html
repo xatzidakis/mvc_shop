@@ -72,24 +72,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr id="firstProd">
-                    <td name="description">Iphone case</td>
-                    <td name="price">334</td>
+                <tr th:id="${product.id}" th:each="product : ${products}">
+                    <td th:text="${product.description}" name="description"></td>
+                    <td th:text="${product.price}" name="price"></td>
                     <td>
-                        <button id="demo" onclick="myFunction()" style="border: none; background-color: transparent">
+                        <button  th:onclick="myFunction([[${product.id}]])" style="border: none; background-color: transparent">
                             <i class="bi bi-cart"></i>
                         </button>
 
                     </td>
                 </tr>
-                <tr>
-                    <td>Samsung case</td>
-                    <td >88</td>
-                </tr>
-                <tr>
-                    <td>Iphone 7</td>
-                    <td >787</td>
-                </tr>
+
+
 
                 </tbody>
             </table>
@@ -108,41 +102,80 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th>product Id</th>
                     <th>Description</th>
                     <th>Price</th>
                     <th>Quantity</th>
                 </tr>
                 </thead>
                 <tbody id="cart">
-                <tr  th:each="product : ${products}">
-                    <td class="col-7" th:text="${product.description}"></td>
-                    <td class="col-3" th:text="${product.price}"></td>
-                    <td class="col-2"><input class="col-7 text-center" type="number"/></td>
-                </tr>
+<!--                <tr  th:each="product : ${products}">-->
+<!--                    <td class="col-7" th:text="${product.description}"></td>-->
+<!--                    <td class="col-3" th:text="${product.price}"></td>-->
+<!--                    <td class="col-2"><input class="col-7 text-center" type="number"/></td>-->
+<!--                </tr>-->
                 </tbody>
             </table>
+            <button onclick="test()" type="button">Submit Order</button>
         </div>
 
     </div>
     <script>
-    function myFunction() {
-  var el = document.getElementById("firstProd");
+    function myFunction(id) {
+  var el = document.getElementById(id);
   el.remove();
-  var description = el.children.description.name;
-  var price = el.children.description.price;
+  var description = el.children.description.innerText;
+  var price = el.children.price.innerText;
   var productId = el.id;
 
   var tr = document.createElement('tr');
   tr.id = productId;
   var tdDescription = document.createElement('td');
-  tdDescription.name = description;
+  tdDescription.setAttribute('name', 'description');
+  tdDescription.classList.add("col-7")
+  tdDescription.innerText = description;
   var tdPrice = document.createElement('td');
-  tdPrice.name = price;
+  tdPrice.setAttribute('name', 'price');
+  tdPrice.innerText = price;
+<!--  tdPrice.id = price;-->
+  tdPrice.classList.add("col-3")
   var tdQuantity = document.createElement('input');
+  tdQuantity.classList.add("col-7")
   tdQuantity.type = 'number';
+   tdQuantity.setAttribute('value',1 );
+   tdQuantity.setAttribute('name','quantity' );
+   var tdId = document.createElement('td');
+   tdId.setAttribute('name','prodId' );
+   tdId.innerText = productId;
+   tr.appendChild(tdId);
+  tr.appendChild(tdDescription);
+  tr.appendChild(tdPrice);
+  tr.appendChild(tdQuantity);
   var cart = document.getElementById("cart");
-  cart.appendChild(el);
+  cart.appendChild(tr);
+}
+function test() {
+var products = []
+var cart = document.getElementById("cart");
+var rows = cart.children
+for(let row of rows) {
+    var obj ={productId: row.children.prodId.innerText}
+        products.push(obj)
 
+
+}
+
+var address = document.getElementById('address').value
+var discount = document.getElementById('discount').value
+var data = {
+"address": address,
+"discountPercentage": discount,
+"products": products
+}
+fetch("/api/orders", {
+method: "POST",
+data: JSON.stringify(data)
+}).then(res => console.log('res', res))
 }
 </script>
 </main>
